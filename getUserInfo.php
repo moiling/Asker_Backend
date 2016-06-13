@@ -59,12 +59,12 @@ switch ($type) {
                 'state' => 200,
                 'info'  => 'Success',
                 'data'  => array(
-                    'id'      => (int)$row['id'],
-                    'college' => $row['college'],
-                    'academy' => $row['academy'],
-                    'realName'   => $row['realName'],
+                    'id'             => (int)$row['id'],
+                    'college'        => $row['college'],
+                    'academy'        => $row['academy'],
+                    'realName'       => $row['realName'],
                     'authentication' => $row['authentication'],
-                    'user'    => array(
+                    'user'           => array(
                         'id'       => (int)$row['userId'],
                         'type'     => $row['type'],
                         'nickName' => $row['nickName'],

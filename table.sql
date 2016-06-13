@@ -143,9 +143,9 @@ CREATE TABLE question (
   recent       TIMESTAMP    NOT NULL,
   -- 提问类型(学科等) --
   type         VARCHAR(20),
-  answerCount  INTEGER,
+  answerCount  INTEGER      NOT NULL DEFAULT 0,
   bestAnswerId INTEGER,
-  starCount    INTEGER,
+  starCount    INTEGER      NOT NULL DEFAULT 0,
 
   PRIMARY KEY (id),
   FOREIGN KEY (authorId) REFERENCES student (id)
@@ -181,12 +181,13 @@ CREATE TABLE answerContent (
 -- ------------------------------------
 DROP TABLE IF EXISTS answer;
 CREATE TABLE answer (
-  id            INTEGER NOT NULL AUTO_INCREMENT,
-  questionId    INTEGER NOT NULL,
-  authorId      INTEGER NOT NULL,
-  contentId     INTEGER NOT NULL,
-  likeNumber    INTEGER,
-  dislikeNumber INTEGER,
+  id            INTEGER   NOT NULL AUTO_INCREMENT,
+  questionId    INTEGER   NOT NULL,
+  authorId      INTEGER   NOT NULL,
+  contentId     INTEGER   NOT NULL,
+  likeNumber    INTEGER   NOT NULL DEFAULT 0,
+  dislikeNumber INTEGER   NOT NULL DEFAULT 0,
+  date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
   PRIMARY KEY (id),
   FOREIGN KEY (questionId) REFERENCES question (id)

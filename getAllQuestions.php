@@ -4,6 +4,8 @@ include 'dbConnection.php';
 $page     = $_POST['page'];
 $count    = $_POST['count'];
 
+$data = null;
+
 $query = "SELECT question.id             AS id,
                  question.contentId      AS contentId,
                  question.title          AS title,
