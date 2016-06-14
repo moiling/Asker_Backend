@@ -14,6 +14,7 @@ $query = "SELECT answer.id             AS id,
                  answer.likeNumber     AS likeNumber,
                  answer.dislikeNumber  AS dislikeNumber,
                  user.nickName         AS authorName,
+                 user.type             AS authorType,
                  answerContent.content AS content
           FROM user, answer, answerContent
           WHERE answerContent.id = answer.contentId
@@ -33,6 +34,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         'likeNumber'    => (int)$row['likeNumber'],
         'dislikeNumber' => (int)$row['dislikeNumber'],
         'authorName'    => $row['authorName'],
+        'authorType'    => $row['authorType'],
         'content'       => $row['content'],
     );
 }

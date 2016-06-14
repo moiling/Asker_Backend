@@ -29,21 +29,19 @@ switch ($type) {
                 'state' => 200,
                 'info'  => 'Success',
                 'data'  => array(
-                    'id'      => (int)$row['id'],
-                    'college' => $row['college'],
-                    'academy' => $row['academy'],
-                    'year'    => (int)$row['year'],
-                    'major'   => $row['major'],
-                    'user'    => array(
-                        'id'       => (int)$row['userId'],
-                        'type'     => $row['type'],
-                        'nickName' => $row['nickName'],
-                        'date'     => $row['date'],
-                        'sex'      => $row['sex'],
-                        'tel'      => $row['tel'],
-                        'email'    => $row['email'],
-                        'token'    => $token,
-                    )
+                    'id'        => (int)$row['userId'],
+                    'type'      => $row['type'],
+                    'nickName'  => $row['nickName'],
+                    'date'      => $row['date'],
+                    'sex'       => $row['sex'],
+                    'tel'       => $row['tel'],
+                    'email'     => $row['email'],
+                    'token'     => $token,
+                    'studentId' => (int)$row['id'],
+                    'college'   => $row['college'],
+                    'academy'   => $row['academy'],
+                    'year'      => (int)$row['year'],
+                    'major'     => $row['major'],
                 )
             );
         } else {
@@ -59,21 +57,19 @@ switch ($type) {
                 'state' => 200,
                 'info'  => 'Success',
                 'data'  => array(
-                    'id'             => (int)$row['id'],
+                    'id'             => (int)$row['userId'],
+                    'type'           => $row['type'],
+                    'nickName'       => $row['nickName'],
+                    'date'           => $row['date'],
+                    'sex'            => $row['sex'],
+                    'tel'            => $row['tel'],
+                    'email'          => $row['email'],
+                    'token'          => $token,
+                    'teacherId'      => (int)$row['id'],
                     'college'        => $row['college'],
                     'academy'        => $row['academy'],
                     'realName'       => $row['realName'],
                     'authentication' => $row['authentication'],
-                    'user'           => array(
-                        'id'       => (int)$row['userId'],
-                        'type'     => $row['type'],
-                        'nickName' => $row['nickName'],
-                        'date'     => $row['date'],
-                        'sex'      => $row['sex'],
-                        'tel'      => $row['tel'],
-                        'email'    => $row['email'],
-                        'token'    => $token,
-                    )
                 )
             );
         } else {

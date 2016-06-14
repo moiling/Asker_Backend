@@ -7,8 +7,8 @@
 -- ------------------------------------
 DROP DATABASE IF EXISTS asker;
 CREATE DATABASE asker
-  DEFAULT CHARSET utf8
-  COLLATE utf8_general_ci;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci; -- 为了支持emoji
 
 USE asker;
 
@@ -32,7 +32,8 @@ CREATE TABLE user (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for student
@@ -53,7 +54,8 @@ CREATE TABLE student (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for teacher
@@ -74,7 +76,8 @@ CREATE TABLE teacher (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for book
@@ -91,7 +94,8 @@ CREATE TABLE book (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for bookInfo
@@ -109,7 +113,8 @@ CREATE TABLE bookInfo (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for questionContent
@@ -126,7 +131,8 @@ CREATE TABLE questionContent (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for question
@@ -155,7 +161,8 @@ CREATE TABLE question (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- MySQL高版本不允许使用多个CURRENT_TIMESTAMP, 故用Trigger更新时间
 DROP TRIGGER IF EXISTS updateQuestionTrigger;
@@ -174,7 +181,8 @@ CREATE TABLE answerContent (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for answer
@@ -199,7 +207,8 @@ CREATE TABLE answer (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for questionPic
@@ -216,7 +225,8 @@ CREATE TABLE questionPic (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for answerPic
@@ -233,7 +243,8 @@ CREATE TABLE answerPic (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for ask
@@ -254,7 +265,8 @@ CREATE TABLE ask (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for starQuestion
@@ -273,7 +285,8 @@ CREATE TABLE starQuestion (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for likeAnswer
@@ -292,7 +305,8 @@ CREATE TABLE likeAnswer (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Table structure for dislikeAnswer
@@ -311,7 +325,8 @@ CREATE TABLE dislikeAnswer (
 )
   ENGINE = InnoDB
   AUTO_INCREMENT = 0
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for token
@@ -324,7 +339,8 @@ CREATE TABLE token (
   FOREIGN KEY (userId) REFERENCES user (id)
 )
   ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  DEFAULT CHARSET utf8mb4
+  COLLATE utf8mb4_general_ci;
 
 -- ------------------------------------
 -- Add foreign key

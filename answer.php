@@ -29,6 +29,7 @@ if ($pdo->query($insertContent)) {
     if ($pdo->query($insertAnswer)) {
         //$pdo->query('COMMIT');
         $updateAnswerCount = "UPDATE question SET answerCount = answerCount + 1, recent = now() WHERE id = $questionId";
+        $pdo->query($updateAnswerCount);
         $info = array(
             'state' => 200,
             'info' => 'success',
