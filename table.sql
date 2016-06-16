@@ -165,9 +165,12 @@ CREATE TABLE question (
   COLLATE utf8mb4_general_ci;
 
 -- MySQL高版本不允许使用多个CURRENT_TIMESTAMP, 故用Trigger更新时间
-DROP TRIGGER IF EXISTS updateQuestionTrigger;
-CREATE TRIGGER updateQuestionTrigger BEFORE UPDATE ON question
-FOR EACH ROW SET NEW.recent = NOW();
+
+-- 不要……手动更新recent吧……点赞就不要更新了
+
+-- DROP TRIGGER IF EXISTS updateQuestionTrigger;
+-- CREATE TRIGGER updateQuestionTrigger BEFORE UPDATE ON question
+-- FOR EACH ROW SET NEW.recent = NOW();
 
 -- ------------------------------------
 -- Table structure for answerContent
@@ -274,11 +277,11 @@ CREATE TABLE ask (
 DROP TABLE IF EXISTS starQuestion;
 CREATE TABLE starQuestion (
   id         INTEGER NOT NULL AUTO_INCREMENT,
-  studentId  INTEGER NOT NULL,
+  userId     INTEGER NOT NULL,
   questionId INTEGER NOT NULL,
 
   PRIMARY KEY (id),
-  FOREIGN KEY (studentId) REFERENCES student (id)
+  FOREIGN KEY (userId) REFERENCES user (id)
     ON DELETE CASCADE,
   FOREIGN KEY (questionId) REFERENCES question (id)
     ON DELETE CASCADE
@@ -294,11 +297,11 @@ CREATE TABLE starQuestion (
 DROP TABLE IF EXISTS likeAnswer;
 CREATE TABLE likeAnswer (
   id        INTEGER NOT NULL AUTO_INCREMENT,
-  studentId INTEGER NOT NULL,
+  userId    INTEGER NOT NULL,
   answerId  INTEGER NOT NULL,
 
   PRIMARY KEY (id),
-  FOREIGN KEY (studentId) REFERENCES student (id)
+  FOREIGN KEY (userId) REFERENCES user (id)
     ON DELETE CASCADE,
   FOREIGN KEY (answerId) REFERENCES answer (id)
     ON DELETE CASCADE
@@ -314,11 +317,11 @@ CREATE TABLE likeAnswer (
 DROP TABLE IF EXISTS dislikeAnswer;
 CREATE TABLE dislikeAnswer (
   id        INTEGER NOT NULL AUTO_INCREMENT,
-  studentId INTEGER NOT NULL,
+  userId    INTEGER NOT NULL,
   answerId  INTEGER NOT NULL,
 
   PRIMARY KEY (id),
-  FOREIGN KEY (studentId) REFERENCES student (id)
+  FOREIGN KEY (userId) REFERENCES user (id)
     ON DELETE CASCADE,
   FOREIGN KEY (answerId) REFERENCES answer (id)
     ON DELETE CASCADE

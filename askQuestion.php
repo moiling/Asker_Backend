@@ -32,7 +32,7 @@ $insertContent = "INSERT INTO questionContent(content) VALUES ('{$content}')";
 if ($pdo->query($insertContent)) {
     $contentId = $pdo->lastInsertId();
     $insertQuestion = "INSERT INTO question(authorId, contentId, title, type, recent, answerCount, starCount)
-                       VALUES ({$authorId}, {$contentId}, '{$title}', '{$type}', now(), 0, 0)";
+                       VALUES ($authorId, $contentId, '$title', '$type', now(), 0, 0)";
     if ($pdo->query($insertQuestion)) {
         //$pdo->query('COMMIT');
         $info = array(

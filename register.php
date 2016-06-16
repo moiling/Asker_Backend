@@ -17,7 +17,7 @@ if ($accountId == '' || $password == '') {
         'data'  => null,
     );
 } else {
-    $query = "SELECT id FROM user WHERE accountId = '{$accountId}'";
+    $query = "SELECT id FROM user WHERE accountId = '$accountId'";
     $user = $pdo->query($query);
     if ($row = $user->fetch()) {
         header("http/1.1 400 Bad Request");
@@ -27,7 +27,7 @@ if ($accountId == '' || $password == '') {
             'data'  => null,
         );
     } else {
-        $query = "INSERT INTO user(accountId, password, type) VALUE ('{$accountId}', '{$password}', '{$type}')";
+        $query = "INSERT INTO user(accountId, password, type) VALUE ('$accountId', '$password', '$type')";
         if ($pdo->query($query)) {
             $info = array(
                 'state' => 200,

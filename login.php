@@ -5,7 +5,7 @@ include 'token.php';
 $accountId = $_POST['accountId'];
 $password  = $_POST['password'];
 
-$query = "SELECT * FROM user WHERE accountId = '{$accountId}'";
+$query = "SELECT * FROM user WHERE accountId = '$accountId'";
 $result = $pdo->query($query);
 
 if ($row = $result->fetch()) {

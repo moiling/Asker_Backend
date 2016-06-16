@@ -2,7 +2,7 @@
 
 function getStudentId(PDO $pdo, $userId, &$returnData)
 {
-    $query = "SELECT id FROM student WHERE userId = '".$userId."'";
+    $query = "SELECT id FROM student WHERE userId = $userId";
 
     $result = $pdo->query($query);
     if ($row = $result->fetch()) {

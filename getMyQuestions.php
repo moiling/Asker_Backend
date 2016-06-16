@@ -1,16 +1,18 @@
 <?php
 include 'dbConnection.php';
 include 'token.php';
+include 'student.php';
 
-// token 可有可无, 只是为了得到是否赞了
 $token = $_POST['token'];
-$userId = null;
-if ($token != null && $token != "") {
-    $userId = checkToken($pdo, $token, $returnData);
-    if ($userId == -1) {
-        echo json_encode($returnData);
-        return;
-    }
+$userId = checkToken($pdo, $token, $returnData);
+if ($userId == -1) {
+    echo json_encode($returnData);
+    return;
+}
+$authorId = getStudentId($pdo, $userId, $returnData);
+if ($authorId == -1) {
+    echo json_encode($returnData);
+    return;
 }
 
 $page     = $_POST['page'];
@@ -33,6 +35,7 @@ $query = "SELECT question.id             AS id,
           WHERE questionContent.id = question.contentId
             AND student.userId     = user.id
             AND question.authorId  = student.id
+            AND user.id            = $userId
           ORDER BY IFNULL (recent, question.date)
           DESC LIMIT ".($page * $count).",".$count;
 
@@ -61,7 +64,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     );
 }
 
-$totalCount = $pdo->query("SELECT COUNT(*) AS count FROM question")->fetch();
+$totalCount = $pdo->query("SELECT COUNT(*) AS count FROM question WHERE authorId = $authorId")->fetch();
 
 $info = array(
     'state'       => 200,

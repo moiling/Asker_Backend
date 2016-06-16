@@ -69,7 +69,7 @@ switch ($type) {
                     'college'        => $row['college'],
                     'academy'        => $row['academy'],
                     'realName'       => $row['realName'],
-                    'authentication' => $row['authentication'],
+                    'authentication' => (boolean)$row['authentication'],
                 )
             );
         } else {

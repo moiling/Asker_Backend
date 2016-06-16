@@ -2,15 +2,11 @@
 include 'dbConnection.php';
 include 'token.php';
 
-// token 可有可无, 只是为了得到是否赞了
 $token = $_POST['token'];
-$userId = null;
-if ($token != null && $token != "") {
-    $userId = checkToken($pdo, $token, $returnData);
-    if ($userId == -1) {
-        echo json_encode($returnData);
-        return;
-    }
+$userId = checkToken($pdo, $token, $returnData);
+if ($userId == -1) {
+    echo json_encode($returnData);
+    return;
 }
 
 $page     = $_POST['page'];
@@ -33,18 +29,13 @@ $query = "SELECT question.id             AS id,
           WHERE questionContent.id = question.contentId
             AND student.userId     = user.id
             AND question.authorId  = student.id
+            AND question.id IN (SELECT questionId FROM starQuestion WHERE userId = $userId)
           ORDER BY IFNULL (recent, question.date)
           DESC LIMIT ".($page * $count).",".$count;
 
 $result = $pdo->query($query);
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    $row['stared'] = false;
-    if ($userId != null) {
-        if ($stared = $pdo->query("SELECT id FROM starQuestion WHERE userId = $userId AND questionId = ".(int)$row['id'])->fetch()) {
-            $row['stared'] = true;
-        }
-    }
     $data[] = array(
         'id'           => (int)$row['id'],
         'contentId'    => (int)$row['contentId'],
@@ -57,11 +48,11 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         'starCount'    => (int)$row['starCount'],
         'authorName'   => $row['authorName'],
         'content'      => $row['content'],
-        'stared'       => $row['stared'],
+        'stared'       => true,
     );
 }
 
-$totalCount = $pdo->query("SELECT COUNT(*) AS count FROM question")->fetch();
+$totalCount = $pdo->query("SELECT COUNT(*) AS count FROM question WHERE question.id IN (SELECT questionId FROM starQuestion WHERE userId = $userId)")->fetch();
 
 $info = array(
     'state'       => 200,
