@@ -18,29 +18,32 @@ $info = array(
     'data' => null,
 );
 
-//$pdo->query('START TRANSACTION');
+$pdo->query('START TRANSACTION');
 
-$insertContent = "INSERT INTO answerContent(content) VALUES ('$content')";
+$insertContent = "INSERT INTO answerContent(content)
+                                    VALUES ('$content')";
 
 if ($pdo->query($insertContent)) {
     $contentId = $pdo->lastInsertId();
     $insertAnswer = "INSERT INTO answer(authorId, contentId, questionId, date)
-                       VALUES ($authorId, $contentId, $questionId, now())";
+                                VALUES ($authorId, $contentId, $questionId, now())";
     if ($pdo->query($insertAnswer)) {
-        //$pdo->query('COMMIT');
-        $updateAnswerCount = "UPDATE question SET answerCount = answerCount + 1, recent = now() WHERE id = $questionId";
+        $updateAnswerCount = "UPDATE question
+                              SET answerCount = answerCount + 1, recent = now()
+                              WHERE id = $questionId";
         $pdo->query($updateAnswerCount);
+        $pdo->query('COMMIT');
         $info = array(
             'state' => 200,
             'info' => 'success',
             'data' => '回答成功',
         );
     } else {
-        // $pdo->query('ROLLBACK');
+        $pdo->query('ROLLBACK');
     }
 } else {
-    // $pdo->query('ROLLBACK');
+    $pdo->query('ROLLBACK');
 }
-//$pdo->query('END');
+$pdo->query('END');
 
 echo json_encode($info);

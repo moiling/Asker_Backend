@@ -6,11 +6,11 @@ URL:  http://api.moinut.com/asker/register.php
 
 PARAMS:
 
-> **accountId** - String - 长度 < 20
+> **accountId** - String - 长度 < 20 - 账号
 >
-> **password**  - String - 长度 < 20
+> **password**  - String - 长度 < 20 - 密码
 >
-> **type**            - String - 'student' or 'teacher' 缺省 => 'student'
+> **type**            - String - 'student' or 'teacher' 缺省 => 'student' - 类型
 
 RETURN:
 
@@ -39,14 +39,14 @@ RETURN:
   "state": 200,
   "info": "success",
   "data": {
-    "id": 5,
-    "type": "student",
-    "nickName": "MOILING",
-    "date": "2016-06-01 17:47:21",
-    "sex": "male",
-    "tel": "110",
-    "email": "super8moi@gmail.com",
-    "token": "ca06eeddb640d398059eb9d827d11ca5fdcabe54"
+    "id": 5, // 唯一id，虽然没啥用，但还是返回了
+    "type": "student", // 账户类型(student & teacher)
+    "nickName": "MOILING", // 昵称 
+    "date": "2016-06-01 17:47:21", // 注册时间
+    "sex": "male", // 性别(male & female)
+    "tel": "110", // 电话
+    "email": "super8moi@gmail.com", // 邮箱
+    "token": "ca06eeddb640d398059eb9d827d11ca5fdcabe54" // token
   }
 }
 ```
@@ -57,13 +57,13 @@ URL: http://api.moinut.com/asker/askQuestion.php
 
 PARAMS:
 
-> **token**      -String
+> **token**      - String
 >
-> **title**         -String
+> **title**         - String - 标题
 >
-> **content**  -String
+> **content**  - String - 内容
 >
-> **type**        -String
+> **type**        - String - 类型
 
 RETURN:
 
@@ -81,9 +81,15 @@ URL: http://api.moinut.com/asker/getAllQuestions.php
 
 PARAMS:
 
-> **page**   - int
+> 必填:
 >
-> **count** - int
+> **page**   - int - 第几页，程序员是从0开始的
+>
+> **count** - int - 一页返回多少条数据
+>
+> 选填:
+>
+> **token** - String - 只有上传这玩意才能知道是否点过赞了，否则stared永远是false
 
 RETURN:
 
@@ -91,22 +97,23 @@ RETURN:
 {
   "state": 200,
   "info": "success",
-  "totalCount": 2,
-  "totalPage": 1,
-  "currentPage": "0",
+  "totalCount": 2, // 一共有多少条信息
+  "totalPage": 1, // 照你传的count来计算，一共有多少页
+  "currentPage": 0, // 当前页
   "data": [
     {
-      "id": "46",
-      "contentId": "57",
-      "title": "这里是标题",
-      "date": "2016-06-01 23:13:21",
-      "recent": "2016-06-01 23:13:21",
-      "type": "测试",
-      "answerCount": "0",
-      "bestAnswerId": null,
-      "starCount": "0",
-      "authorName": "MOILING",
-      "content": "这里是详细内容之类巴拉巴拉的"
+      "id": "46", // 问题id，用于查看答案和回复时传的questionId
+      "contentId": "57", // 这个对于客户端来说，完！全！没！用！
+      "title": "这里是标题", // 问题标题
+      "date": "2016-06-01 23:13:21", // 问题发布日期
+      "recent": "2016-06-01 23:13:21", // 问题最后更新日期
+      "type": "测试", // 问题类型
+      "answerCount": "0", // 回答个数
+      "bestAnswerId": null, // 最佳答案，记得判null，不好意思返回了null
+      "starCount": "0", // 点赞数目
+      "authorName": "MOILING", // 提问者名字
+      "content": "这里是详细内容之类巴拉巴拉的", // 问题内容
+      "stared": false // 是否已点赞，只有当传token的时候有效，否则都是false
     },
     {
       "id": "45",
@@ -119,7 +126,8 @@ RETURN:
       "bestAnswerId": null,
       "starCount": "0",
       "authorName": "MOILING",
-      "content": "反正就是好烦，怎么办呢！没法做事了呀！！！！好烦好烦好烦！"
+      "content": "反正就是好烦，怎么办呢！没法做事了呀！！！！好烦好烦好烦！",
+      "stared": false
     }
   ]
 }
@@ -151,11 +159,11 @@ PARAMS:
 >
 > **academy**    - String
 >
-> **year**             - int       - Student Only
+> **year**             - int       - **Student Only**
 >
-> **major**          - String - Student Only
+> **major**          - String - **Student Only**
 >
-> **realName**   - String - Teacher Only
+> **realName**   - String - **Teacher Only**
 
 RETURN:
 
@@ -186,21 +194,19 @@ RETURN:
   "state": 200,
   "info": "Success",
   "data": {
-    "id": 1,
-    "college": "CQUPT",
-    "academy": "Software",
-    "year": 2014,
-    "major": "Software",
-    "user": {
-      "id": 5,
-      "type": "student",
-      "nickName": "MOILING",
-      "date": "2016-06-01 17:47:21",
-      "sex": "male",
-      "tel": "110",
-      "email": "super8moi@gmail.com",
-      "token": "77712a2b924e85ba20162ca9abdeb415a73f9d86"
-    }
+    "id": 5, // 用户id
+    "type": "student", // 用户类型(student & teacher)
+    "nickName": "MOILING", // 昵称
+    "date": "2016-06-01 17:47:21", // 注册时间
+    "sex": "female", // 性别(male & female)
+    "tel": "18883992395", // 电话
+    "email": "super8moi@gmail.com", // 邮箱
+    "token": "d64177833a3b7f90ab41fe1106d4eb900f730f65", // token，为什么要返回……
+    "studentId": 1, // 学生id
+    "college": "重庆邮电大学", // 学校
+    "academy": "软件工程", // 学院
+    "year": 2014, // 入学年份
+    "major": "软件工程" // 专业
   }
 }
 ```
@@ -212,21 +218,19 @@ RETURN:
   "state": 200,
   "info": "Success",
   "data": {
-    "id": 1,
-    "college": "CQUPT",
-    "academy": "Software",
-    "realName": "张三",
-    "authentication": "0", // 0->未认证  1->已认证
-    "user": {
-      "id": 7,
-      "type": "teacher",
-      "nickName": "Teacher",
-      "date": "2016-06-01 17:53:30",
-      "sex": "male",
-      "tel": "1234567890",
-      "email": "a@b.c",
-      "token": "f42b08eaf8fa88296af5900c0b06d6c35b575aa6"
-    }
+    "id": 7,
+    "type": "teacher",
+    "nickName": "凌老师",
+    "date": "2016-06-01 17:53:30",
+    "sex": "male",
+    "tel": "18883992395",
+    "email": "super8moi@gmail.com",
+    "token": "f2e7e23ae90a3473558ea0376024ed4e0d9d4523",
+    "teacherId": 1, // 教师id
+    "college": "重庆邮电大学", // 学校
+    "academy": "软件工程", // 学院
+    "realName": "莫伊", // 真实姓名
+    "authentication": false // 是否认证
   }
 }
 ```
@@ -239,9 +243,9 @@ PARAMS:
 
 > **token**            - String
 >
-> **questionId**  - int
+> **questionId**  - int - 就是获取问题时得到的id
 >
-> **content**        - String
+> **content**        - String - 回复内容
 
 RETURN:
 
@@ -259,7 +263,7 @@ URL: http://api.moinut.com/asker/getAnswers.php
 
 PARAMS:
 
-> **questionId** - int
+> **questionId** - int - 就是获取问题时得到的id
 >
 > **page**            - int
 >
@@ -277,13 +281,13 @@ RETURN:
   "data": [
     {
       "id": 2,
-      "contentId": 2,
-      "date": "2016-06-13 16:40:46",
+      "contentId": 2, // 完！全！没！用！
+      "date": "2016-06-13 16:40:46", // 回复时间
       "questionId": 83,
-      "likeNumber": 0,
-      "dislikeNumber": 0,
-      "authorName": "Teacher",
-      "content": "我虽然没讲，但我默认你都会了"
+      "likeNumber": 0, // 喜欢个数
+      "dislikeNumber": 0, // 不喜欢个数
+      "authorName": "Teacher", // 回答者名字
+      "content": "我虽然没讲，但我默认你都会了" // 回复内容
     },
     {
       "id": 3,
@@ -299,5 +303,56 @@ RETURN:
 }
 ```
 
+### 9. 点赞 & 取消赞
 
+URL: http://api.moinut.com/asker/starQuestion.php
+
+PARAMS:
+
+> **questionId** - int - 就是获取问题时得到的id
+>
+> **token**           - String
+
+```json
+{
+  "state": 200,
+  "info": "success",
+  "data": {
+    "type": "star", // 状态(star & unStar),目前操作后你时候赞了
+    "count": 2 // 该问题目前点赞数
+  }
+}
+```
+
+### 10. 评价回复（顶 & 踩）
+
+URL: http://api.moinut.com/asker/likeAnswer.php
+
+PARAMS:
+
+> **answerId** - int - 就是获取回答时得到的id
+>
+> **type**          - String - like & dislike - 顶还是踩
+>
+> **token**       - String
+
+```json
+{
+  "state": 200,
+  "info": "success",
+  "data": 2 // 该操作后（顶数-踩数）
+}
+```
+
+### 11. 查看我点赞的问题列表
+
+URL: http://api.moinut.com/asker/getStarQuestions.php
+
+其余和**查看问题列表**一样
+
+### 12. 查看我发出的问题列表
+
+URL: http://api.moinut.com/asker/getMyQuestions.php
+
+其余和**查看问题列表**一样
 
